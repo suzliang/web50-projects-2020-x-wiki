@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create
+{% endblock %}
+
+{% block body %}
+    <h1>Create New Encyclopedia Entry</h1>
+
+    <form class="form-horizontal" action="{% url 'create' %}" method="POST">
+        {% for field in form %}
+            <div class="form-group">
+                {% csrf_token %}
+                <label class="control-label col-sm-2" for="f">{{ field.label_tag }}</label>
+                <div class="col-sm-10">{{ field }}</div>
+                {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}
